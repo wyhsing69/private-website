@@ -3,94 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch Me If You Can</title>
+    <title>The Impossible Choice</title>
     <style>
-        /* Modern Beige Aesthetic */
         body {
             background-color: #f5f5dc; /* Beige */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden; /* Prevents scrollbars when button moves */
-            color: #4a4a4a;
+            overflow: hidden;
+            color: #333;
         }
 
         .container {
             text-align: center;
-            z-index: 1; /* Keeps text and image behind the button */
+            z-index: 1;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
-        .image-placeholder {
-            width: 300px;
-            height: 300px;
-            background-color: #e2e2ca;
-            border: 2px dashed #b5b59a;
-            border-radius: 15px;
+        .image-container {
+            width: 350px;
+            height: 250px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #e9e9d0;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
         }
 
-        img {
+        .image-container img {
             max-width: 100%;
             max-height: 100%;
-            border-radius: 15px;
+            object-fit: cover;
         }
 
-        /* The Tricky Button */
-        #runaway-btn {
-            position: absolute;
-            padding: 12px 25px;
-            font-size: 1.2rem;
-            background-color: #d9534f;
-            color: white;
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Basic styling for both buttons */
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.1rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.1s ease;
-            white-space: nowrap;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        /* The "Yes" button stays put */
+        #yes-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* The "No" button will run away */
+        #no-btn {
+            background-color: #e74c3c;
+            color: white;
+            position: absolute; /* Essential for movement */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Catch the Button to Win!</h1>
+        <h1>Are you hungry?</h1>
         
-        <div class="image-placeholder">
-            <img src="your-image-url.jpg" alt="Your Photo Here">
-            </div>
+        <div class="image-container">
+            <img src="img/main.jpg" alt="Loading image...">
+        </div>
+
+        <div class="button-group">
+            <button class="btn" id="yes-btn">Yes</button>
+            <button class="btn" id="no-btn">No</button>
+        </div>
     </div>
 
-    <button id="runaway-btn">Click Me!</button>
-
     <script>
-        const btn = document.getElementById('runaway-btn');
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
 
-        // Teleport the button when mouse gets close
-        btn.addEventListener('mouseover', () => {
-            const padding = 50; // Keep away from screen edges
-            const x = Math.random() * (window.innerWidth - btn.clientWidth - padding);
-            const y = Math.random() * (window.innerHeight - btn.clientHeight - padding);
+        // Logic for the Runaway "No" Button
+        noBtn.addEventListener('mouseover', () => {
+            const padding = 100; // Keep away from screen edges
+            const x = Math.random() * (window.innerWidth - noBtn.clientWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.clientHeight - padding);
             
-            btn.style.left = `${x}px`;
-            btn.style.top = `${y}px`;
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
         });
 
-        // Reward for the 1% who actually click it
-        btn.addEventListener('click', () => {
-            alert("Impressive! You've got fast hands!");
+        // Logic for the "Yes" Button
+        yesBtn.addEventListener('click', () => {
+            alert("I knew it! Let's go get some food! 🍕");
         });
     </script>
 
