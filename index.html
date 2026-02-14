@@ -1,41 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>抓不到我吧！</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch Me If You Can</title>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        /* Modern Beige Aesthetic */
+        body {
+            background-color: #f5f5dc; /* Beige */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+            color: #4a4a4a;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 1; /* Keeps text and image behind the button */
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .image-placeholder {
+            width: 300px;
+            height: 300px;
+            background-color: #e2e2ca;
+            border: 2px dashed #b5b59a;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+        }
+
+        /* The Tricky Button */
         #runaway-btn {
-            padding: 15px 30px;
-            font-size: 20px;
-            background-color: #ff4757;
+            position: absolute;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            background-color: #d9534f;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            position: absolute; /* 關鍵：必須是絕對定位 */
-            transition: 0.1s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.1s ease;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
 
-    <button id="runaway-btn">點我領取一億元</button>
+    <div class="container">
+        <h1>Catch the Button to Win!</h1>
+        
+        <div class="image-placeholder">
+            <img src="your-image-url.jpg" alt="Your Photo Here">
+            </div>
+    </div>
+
+    <button id="runaway-btn">Click Me!</button>
 
     <script>
         const btn = document.getElementById('runaway-btn');
 
+        // Teleport the button when mouse gets close
         btn.addEventListener('mouseover', () => {
-            // 計算視窗寬高，扣掉按鈕大小避免跑出邊界
-            const x = Math.random() * (window.innerWidth - btn.clientWidth);
-            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            const padding = 50; // Keep away from screen edges
+            const x = Math.random() * (window.innerWidth - btn.clientWidth - padding);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight - padding);
             
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
         });
 
+        // Reward for the 1% who actually click it
         btn.addEventListener('click', () => {
-            alert('竟然被你點到了！你是外星人嗎？');
+            alert("Impressive! You've got fast hands!");
         });
     </script>
+
 </body>
 </html>
