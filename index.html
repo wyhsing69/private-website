@@ -107,20 +107,28 @@
             }
 
             const padding = 100;
-            const x = Math.random() * (window.innerWidth - noBtn.clientWidth - padding);
-            const y = Math.random() * (window.innerHeight - noBtn.clientHeight - padding);
+            let newX, newY;
+            let distance = 0;
+
+            const currentX = noBtn.offsetLeft;
+            const currentY = noBtn.offsetTop;
+
+            while (distance < 250) {
+                newX = Math.random() * (window.innerWidth - noBtn.clientWidth - padding);
+                newY = Math.random() * (window.innerHeight - noBtn.clientHeight - padding);
+                distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
+            }
             
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
         });
 
-        // 成功點到 No 的 alert
         noBtn.addEventListener('click', () => {
             alert("How did you do that!?");
         });
 
         yesBtn.addEventListener('click', () => {
-            alert("We are bestie :)");
+            alert("Celebrating cause we are bestie :)");
         });
     </script>
 
